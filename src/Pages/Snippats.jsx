@@ -17,7 +17,7 @@ const Snippats = () => {
                             <h2 className="text-xl font-semibold mb-2">{snippat.title}</h2>
                             <p className="text-gray-500 mb-4">{snippat.date}</p>
                             <div className="mb-4">
-                                <button className="bg-red-300 text-white px-4 py-1 rounded-lg text-sm">
+                                <button className="bg-violet-500 text-white px-4 py-1 rounded-sm text-sm">
                                     {snippat.category}
                                 </button>
                             </div>
