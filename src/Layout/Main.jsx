@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 
 function componentName() {
     return (
-        <div>
+        <div className='mt-2'>
             <Navbar/>
             <Outlet/>
         </div>
