@@ -5,8 +5,22 @@ import { FreeMode, Pagination } from 'swiper/modules';
 // import required modules
 import 'swiper/css';
 import 'swiper/css/free-mode';
+import { useForm } from "react-hook-form";
 
 const Navbar = () => {
+
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    reset,
+  } = useForm()
+
+  const onSubmit =(data)=>{
+    console.log(data)
+  }
 
 
   return (
@@ -40,9 +54,32 @@ const Navbar = () => {
               type="text"
               placeholder="Search a snippat..."
             />
-            <button className="absolute text-sm right-1 h-7 w-20 bg-violet-500 text-white rounded-full hover:bg-violet-600">
+            {/* <button className="absolute text-sm right-1 h-7 w-20 bg-violet-500 text-white rounded-full hover:bg-violet-600">
               + Snippet
-            </button>
+            </button> */}
+            {/* Open the modal using document.getElementById('ID').showModal() method */}
+          <button className=" absolute text-sm right-1 h-7 w-20 bg-violet-500 text-white rounded-full hover:bg-violet-600" onClick={()=>document.getElementById('my_modal_2').showModal()}>+ Snippet</button>
+              <dialog id="my_modal_2" className="modal">
+
+                <div className="modal-box">
+                  {/* content inside of the modal */}
+
+                  <form onSubmit={handleSubmit(onSubmit)}>
+
+                        <input defaultValue="test" {...register("example")} />
+
+                        <input {...register("exampleRequired", { required: true })} />
+                        {errors.exampleRequired && <span>This field is required</span>}
+
+                        <input type="submit" />
+                  </form>
+                  
+                </div>
+
+                <form method="dialog" className="modal-backdrop">
+                  <button>close</button>
+                </form>
+              </dialog>
       </div>
 
           <div>
