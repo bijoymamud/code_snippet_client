@@ -6,6 +6,7 @@ import { FreeMode, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import { useForm } from "react-hook-form";
+import { Fa1, FaI, FaT } from "react-icons/fa6";
 
 const Navbar = () => {
 
@@ -59,19 +60,50 @@ const Navbar = () => {
             </button> */}
             {/* Open the modal using document.getElementById('ID').showModal() method */}
           <button className=" absolute text-sm right-1 h-7 w-20 bg-violet-500 text-white rounded-full hover:bg-violet-600" onClick={()=>document.getElementById('my_modal_2').showModal()}>+ Snippet</button>
-              <dialog id="my_modal_2" className="modal">
+              <dialog id="my_modal_2" className="modal ">
 
-                <div className="modal-box">
+                <div className="modal-box w-11/12 max-w-3xl py-10 rounded-md">
                   {/* content inside of the modal */}
 
-                  <form onSubmit={handleSubmit(onSubmit)}>
+                  <form onSubmit={handleSubmit(onSubmit)} className="  mx-auto roun px-5">
+                      
+                        <input 
+                        placeholder=" Add title of the snippet"
+                        {...register("title", { required: true })}  className=" input input-bordered w-full rounded-none"/>
+                        {errors.title && <span>Must need to add header</span>}
 
-                        <input defaultValue="test" {...register("example")} />
+                        <div className="grid grid-cols-2 gap-3 my-5">
+                            <input 
+                            placeholder=" Publishing date "
+                            {...register("date", { required: true })}  className=" input input-bordered py-2 rounded-none "/>
+                            {errors.date && <span>Must need to add date</span>}
+                            <input 
+                            placeholder=" Snippet Category"
+                            {...register("category", { required: true })}  className=" input input-bordered py-2 rounded-none "/>
+                            {errors.category && <span>Must need to add category</span>}
+                        </div>
+                   
+                     <div className="grid grid-cols-2 gap-3 mb-5" >
+                        <input 
+                            placeholder="Description of Snippet"
+                            {...register("description", { required: true })}  className=" input input-bordered  w-full rounded-none"/>
+                            {errors.description && <span>Must need to add description</span>}
+                            <input 
+                            placeholder="Usages of the snippet"
+                            {...register("usage", { required: true })}  className=" input input-bordered  w-full rounded-none"/>
+                            {errors.usage && <span>Must need to add description</span>}
 
-                        <input {...register("exampleRequired", { required: true })} />
-                        {errors.exampleRequired && <span>This field is required</span>}
+                     </div>
+                       
+                        <textarea 
+                          placeholder=" Type your code"
+                          {...register("code", { required: true })}  className=" input input-bordered h-[70px] pt-1  w-full rounded-none"/>
+                          {errors.code && <span>Must need to add code</span>}
+                      
 
-                        <input type="submit" />
+                        <div className="flex justify-end pt-3">
+                               <input className="btn btn-wide text-base" type="submit" />
+                        </div>
                   </form>
                   
                 </div>
