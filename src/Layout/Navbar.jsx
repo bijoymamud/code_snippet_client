@@ -7,6 +7,7 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import { useForm } from "react-hook-form";
 import { Fa1, FaI, FaT } from "react-icons/fa6";
+import useSnippet from "../Hooks/useSnippet";
 
 const Navbar = () => {
 
@@ -19,9 +20,17 @@ const Navbar = () => {
     reset,
   } = useForm()
 
-  const onSubmit =(data)=>{
-    console.log(data)
-  }
+
+
+
+  const onSubmit = (data) => {
+    const existingSnippets = JSON.parse(localStorage.getItem('snippets')) || [];
+    const updatedSnippets = [...existingSnippets, data];
+    localStorage.setItem('snippets', JSON.stringify(updatedSnippets));
+    console.log(data);
+    reset();
+  };
+  
 
 
   return (
@@ -55,10 +64,7 @@ const Navbar = () => {
               type="text"
               placeholder="Search a snippat..."
             />
-            {/* <button className="absolute text-sm right-1 h-7 w-20 bg-violet-500 text-white rounded-full hover:bg-violet-600">
-              + Snippet
-            </button> */}
-            {/* Open the modal using document.getElementById('ID').showModal() method */}
+            
           <button className=" absolute text-sm right-1 h-7 w-20 bg-violet-500 text-white rounded-full hover:bg-violet-600" onClick={()=>document.getElementById('my_modal_2').showModal()}>+ Snippet</button>
               <dialog id="my_modal_2" className="modal ">
 
@@ -72,12 +78,13 @@ const Navbar = () => {
                         {...register("title", { required: true })}  className=" input input-bordered w-full rounded-none"/>
                         {errors.title && <span>Must need to add header</span>}
 
-                        <div className="grid grid-cols-2 gap-3 my-5">
-                            <input 
+                      <div className="grid grid-cols-2 gap-3 my-5">
+                        <input 
+                        type="date"
                             placeholder=" Publishing date "
                             {...register("date", { required: true })}  className=" input input-bordered py-2 rounded-none "/>
                             {errors.date && <span>Must need to add date</span>}
-                            <input 
+                        <input 
                             placeholder=" Snippet Category"
                             {...register("category", { required: true })}  className=" input input-bordered py-2 rounded-none "/>
                             {errors.category && <span>Must need to add category</span>}
@@ -88,7 +95,7 @@ const Navbar = () => {
                             placeholder="Description of Snippet"
                             {...register("description", { required: true })}  className=" input input-bordered  w-full rounded-none"/>
                             {errors.description && <span>Must need to add description</span>}
-                            <input 
+                        <input 
                             placeholder="Usages of the snippet"
                             {...register("usage", { required: true })}  className=" input input-bordered  w-full rounded-none"/>
                             {errors.usage && <span>Must need to add description</span>}
@@ -102,7 +109,7 @@ const Navbar = () => {
                       
 
                         <div className="flex justify-end pt-3">
-                               <input className="btn btn-wide text-base" type="submit" />
+                               <input className="btn btn-wide rounded-md text-base" type="submit" />
                         </div>
                   </form>
                   
